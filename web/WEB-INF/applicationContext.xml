@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Annotation 활성화 -->
+    <mvc:annotation-driven>
+    </mvc:annotation-driven>
+
+    <!-- Component 패키지 지정 -->
+    <context:component-scan base-package="kr.co.cleanbrain.controller"></context:component-scan>
+
+    <mvc:resources mapping="/views/**" location="WEB-INF/views/"/>
+    <mvc:resources mapping="/js/**" location="WEB-INF/js/"/>
+    <mvc:resources mapping="/css/**" location="WEB-INF/css/"/>
+    <mvc:resources mapping="/img/**" location="WEB-INF/image/"/>
+
+    <!-- 여기서 설정한 내용으로 view object의 이름이 결정된다. -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <property name="suffix" value=".jsp"></property>
+        <property name="order" value="1"></property>
+    </bean>
+
+    <!-- properties 사용 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:conf/property/application.properties"/>
+        <property name="fileEncoding" value="UTF-8" />
+    </bean>
+
+</beans>
